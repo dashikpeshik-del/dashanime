@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница не найдена | Anime Pulse</title> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- Глобальные стили (Цветовая палитра) --- */
+        :root {
+            --color-bg-light: #f4f7f6;
+            --color-accent-pink: #ff4081;
+            --color-accent-blue: #536dfe;
+            --color-text-dark: #1a1a2e;
+            --color-slider-bg: #fffde7;
+            --color-footer-bg: #c5cae9; 
+            --color-grid-bg: #e1bee7; 
+            --max-width: 450px; 
+        }
+
+        /* Сброс и центрирование */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            max-width: var(--max-width);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 1. HEADER --- */
+        .header-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.2em;
+            font-weight: 900;
+            color: var(--color-accent-pink);
+            margin: 0;
+        }
+
+        /* Кнопка назад */
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.5em; 
+            color: var(--color-accent-pink); 
+            cursor: pointer;
+            padding: 0;
+            line-height: 1; 
+            position: absolute; 
+            left: 20px; 
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            opacity: 0.8;
+        }
+
+        /* --- Содержимое страницы 404 --- */
+        .error-section {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            text-align: center;
+            background-color: var(--color-bg-light);
+        }
+
+        .error-icon {
+            font-size: 5em;
+            color: var(--color-accent-pink);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .error-title {
+            font-size: 1.8em;
+            color: var(--color-accent-pink);
+            margin: 0 0 15px 0;
+        }
+
+        .error-message {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            margin: 0 0 25px 0;
+            line-height: 1.5;
+            max-width: 90%;
+        }
+
+        .error-code {
+            font-size: 6em;
+            font-weight: 900;
+            color: var(--color-accent-blue);
+            margin: 0 0 10px 0;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .error-subtitle {
+            font-size: 1.2em;
+            color: var(--color-text-dark);
+            margin: 0 0 30px 0;
+            font-weight: 600;
+        }
+
+        .error-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 80%;
+            max-width: 300px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            padding: 12px 20px;
+            background-color: var(--color-accent-blue);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-button:hover {
+            background-color: #7986cb;
+            transform: translateY(-2px);
+        }
+
+        .action-button.secondary {
+            background-color: var(--color-accent-pink);
+        }
+
+        .action-button.secondary:hover {
+            background-color: #ff6e9f;
+        }
+
+        .error-image {
+            width: 200px;
+            height: 150px;
+            background-color: var(--color-grid-bg);
+            border-radius: 10px;
+            margin: 20px 0 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--color-accent-pink);
+            overflow: hidden;
+        }
+
+        .error-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .error-image-placeholder {
+            font-size: 2.5em;
+            color: var(--color-accent-blue);
+        }
+
+        /* --- FOOTER (Нижняя навигация) --- */
+        .footer-section {
+            background-color: var(--color-footer-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            border-top: 1px solid #aaa;
+            position: sticky; 
+            bottom: 0;
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #757575;
+            font-size: 0.7em;
+            cursor: pointer;
+            padding: 5px;
+            text-decoration: none;
+        }
+
+        .footer-item i {
+            font-size: 1.2em;
+            margin-bottom: 3px;
+        }
+
+        .footer-item.active {
+            color: var(--color-accent-pink);
+            font-weight: bold;
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+
+        /* Планшеты */
+        @media (min-width: 451px) and (max-width: 768px) {
+            .page-wrapper {
+                max-width: 600px;
+                border: 1px solid #ccc;
+            }
+            
+            .error-section {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+        }
+
+        /* Десктоп */
+        @media (min-width: 769px) {
+            .page-wrapper {
+                max-width: 900px;
+                border: 1px solid #ccc;
+            }
+
+            .header-section {
+                justify-content: center;
+            }
+            .logo {
+                font-size: 1.5em;
+                margin: 0;
+            }
+            
+            /* Скрываем кнопку "Назад" на больших экранах */
+            .back-button {
+                display: none; 
+            }
+            
+            .error-actions {
+                flex-direction: row;
+                justify-content: center;
+                max-width: 500px;
+            }
+            
+            .action-button {
+                width: auto;
+                min-width: 180px;
+            }
+            
+            /* Нижняя панель навигации скрыта на десктопе */
+            .footer-section {
+                display: none; 
+            }
+            
+            /* Добавляем десктопный подвал */
+            .page-wrapper::after {
+                content: "© 2025 Anime Pulse. Все права защищены. | Политика конфиденциальности | О нас";
+                display: block;
+                text-align: center;
+                padding: 15px;
+                font-size: 0.8em;
+                color: #777;
+                background-color: #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header-section">
+            <button class="back-button" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            
+            <h1 class="logo">ANIME PULSE</h1>
+        </header>
+
+        <section class="error-section">
+            
+            
+            <div class="error-code">404</div>
+            
+            <h2 class="error-subtitle">Ой! Страница потерялась в аниме-вселенной</h2>
+            
+            <p class="error-message">
+                Похоже, вы пытаетесь найти страницу, которая отправилась в параллельное измерение. 
+                Возможно, она переродилась в другой жизни или просто скрывается от демонов.
+            </p>
+            
+           
+            
+            <div class="error-actions">
+                <a href="index.html" class="action-button">
+                    <i class="fas fa-home"></i> На главную
+                </a>
+                
+                <a href="index2.html" class="action-button secondary">
+                    <i class="fas fa-newspaper"></i> К новостям
+                </a>
+            </div>
+            
+            <p class="error-message" style="margin-top: 30px; font-size: 0.9em; color: #777;">
+                Если вы считаете, что это ошибка, сообщите нам через раздел "Профиль"
+            </p>
+        </section>
+
+        <footer class="footer-section">
+            <a href="index.html" class="footer-item">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </a>
+            <a href="#" class="footer-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </a>
+            <a href="#" class="footer-item">
+                <i class="fas fa-video"></i>
+                <span>Трейлеры</span>
+            </a>
+            <a href="#" class="footer-item">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </a>
+        </footer>
+    </div>
+
+    <script>
+        // Если на GitHub Pages и открыта неверная страница
+        if (window.location.hostname.includes('github.io')) {
+            // Список всех существующих страниц
+            const validPages = [
+                '', // корень
+                'index.html',
+                'index2.html',
+                'subscribe_confirmation.html',
+                'chainsaw_man_article.html',
+                '404.html'
+            ];
+            
+            // Текущий путь без слеша в начале
+            const currentPath = window.location.pathname.split('/').pop() || '';
+            
+            // Если страница не существует и мы не на 404
+            if (!validPages.includes(currentPath) && 
+                !currentPath.includes('.css') &&
+                !currentPath.includes('.js') &&
+                !currentPath.includes('.jpg') &&
+                !currentPath.includes('.jpeg') &&
+                !currentPath.includes('.png') &&
+                currentPath !== '404.html') {
+                
+                // Перенаправляем на 404
+                window.location.href = '404.html';
+            }
+        }
+        
+        // Анимация для иконки ошибки
+        document.addEventListener('DOMContentLoaded', function() {
+            const errorIcon = document.querySelector('.error-icon');
+            
+            // Дополнительный эффект при наведении
+            errorIcon.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            
+            errorIcon.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Pulse: Подписка на дайджест</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+/* --- Переменные CSS --- */
+:root {
+    --pink: #ff4081;
+    --blue: #536dfe;
+    --dark: #1a1a2e;
+    --light: #f4f7f6;
+    --success-bg: #e8f5e9; /* Светло-зеленый для уведомления */
+    --success-text: #4caf50; /* Зеленый для текста уведомления */
+}
+
+/* ===== RESET ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== LAYOUT ===== */
+.page {
+    width: 100%;
+    max-width: 450px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    min-height: 100vh; /* Чтобы Toast был виден даже на коротком контенте */
+    position: relative;
+}
+
+/* ===== HEADER (ИЗМЕНЕН) ===== */
+header {
+    display: flex;
+    justify-content: center; /* Центрируем логотип */
+    align-items: center;
+    padding: 15px 20px;
+    background: var(--light);
+}
+
+.logo {
+    font-weight: 900;
+    color: var(--pink);
+    font-size: 1.2em;
+}
+
+/* ===== SUBSCRIBE (Секция с формой) ===== */
+.subscribe {
+    padding: 25px;
+    background: #fff; /* Меняем фон на белый для контраста с light */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+
+.subscribe h2 {
+    margin-bottom: 20px;
+    color: var(--dark);
+    font-size: 1.5em;
+}
+
+/* --- Стили для формы --- */
+.input-field {
+    width: 100%;
+    max-width: 350px;
+    height: 45px;
+    margin-bottom: 15px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    padding: 0 15px;
+    font-size: 0.9em;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-field:focus {
+    border-color: var(--blue);
+}
+
+.subscribe-button {
+    /* Меняем класс, чтобы соответствовать новой логике */
+    width: 100%;
+    max-width: 350px;
+    height: 45px;
+    border-radius: 25px;
+    border: none;
+    background: var(--blue);
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+.subscribe-button:hover {
+    background: #7986cb;
+}
+
+/* ===== TOAST NOTIFICATION (Уведомление) ===== */
+.toast-notification {
+    visibility: hidden;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 50%;
+    
+    width: 90%;
+    max-width: 400px; 
+    transform: translate(-50%, -100%); /* Начальное положение: выше экрана */
+    
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 2px solid var(--success-text);
+    border-radius: 0 0 10px 10px;
+    padding: 15px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    text-align: left;
+    
+    transition: transform 0.5s ease-out;
+}
+
+.toast-notification.show {
+    visibility: visible;
+    transform: translate(-50%, 0); /* Конечное положение: сдвинуть вниз на 0px */
+}
+
+/* Стиль иконки в уведомлении */
+.toast-icon {
+    font-size: 1.5em;
+    color: var(--success-text);
+    margin-right: 15px;
+}
+
+.toast-message {
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+
+/* ===== СТИЛИЗАЦИЯ ИКОНКИ ПОДТВЕРЖДЕНИЯ (похожей на картинку) ===== */
+.confirmation-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: var(--pink); /* Розовый круг */
+    margin-bottom: 30px;
+}
+
+.confirmation-icon i {
+    color: white; /* Белая галочка */
+    font-size: 2.5em;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<header>
+    <div class="logo">ANIME PULSE</div>
+</header>
+
+<section class="subscribe">
+    <div class="confirmation-icon">
+        <i class="fas fa-check"></i> 
+    </div>
+    
+    <h2>Подпишитесь на дайджест</h2>
+    <input type="email" id="emailInput" placeholder="Ваш E-mail (обязательно)" class="input-field">
+    <input type="text" id="nameInput" placeholder="Ваше Имя (необязательно)" class="input-field">
+    
+    <button class="subscribe-button" onclick="showSubscriptionToast()">
+        Подписаться <i class="fas fa-bell" ></i><a href="index2.html"></a>
+    </button>
+</section>
+
+</div>
+
+<div id="subscriptionToast" class="toast-notification">
+    <i class="fas fa-check-circle toast-icon"></i>
+    <span class="toast-message" id="toastMessage">Вы подписаны! Новости будут приходить вам на почту.</span>
+</div>
+
+<script>
+    function showSubscriptionToast() {
+        const toast = document.getElementById('subscriptionToast');
+        const toastMessage = document.getElementById('toastMessage');
+        const emailInput = document.getElementById('emailInput');
+        const nameInput = document.getElementById('nameInput');
+        
+        const email = emailInput.value.trim();
+        
+        // Проверка: E-mail обязателен
+        if (email === "") {
+            // Изменяем сообщение и стили на ошибку (опционально)
+            toastMessage.textContent = "Пожалуйста, введите ваш E-mail для подписки.";
+            // В реальном приложении здесь можно было бы изменить цвет фона/бордера на красный
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+            return; 
+        }
+
+        // 1. Успешная подписка: показываем баннер
+        toastMessage.textContent = "Спасибо за подписку! Новости будут приходить вам на почту.";
+        toast.classList.add('show');
+
+        // 2. Очищаем поля ввода
+        emailInput.value = '';
+        nameInput.value = '';
+        
+        // 3. Скрываем баннер через 4 секунды
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 4000); 
+    }
+</script>
+<script>
+    // Если на GitHub Pages и открыта неверная страница
+    if (window.location.hostname.includes('github.io')) {
+        // Список всех существующих страниц
+        const validPages = [
+            '', // корень
+            'index.html',
+            'index2.html',
+            'subscribe_confirmation.html',
+            'chainsaw_man_article.html',
+            '404.html'
+        ];
+        
+        // Текущий путь без слеша в начале
+        const currentPath = window.location.pathname.split('/').pop() || '';
+        
+        // Если страница не существует и мы не на 404
+        if (!validPages.includes(currentPath) && 
+            !currentPath.includes('.css') &&
+            !currentPath.includes('.js') &&
+            !currentPath.includes('.jpg') &&
+            !currentPath.includes('.jpeg') &&
+            !currentPath.includes('.png') &&
+            currentPath !== '404.html') {
+            
+            // Перенаправляем на 404
+            window.location.href = '404.html';
+        }
+    }
+</script>
+</body>
+</html>

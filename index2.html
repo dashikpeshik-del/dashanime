@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Pulse: Свежие новости аниме, манги и отаку-культуры</title>
+    <meta name="description" content="Ежедневные новости аниме-индустрии, обзоры новых сезонов, даты выхода, трейлеры и мнения сообщества. Будь в курсе всех событий!">
+    
+    <link rel="icon" href="favicon.png" type="image/png"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- Глобальные стили (Цветовая палитра) --- */
+        :root {
+            --color-bg-light: #f4f7f6;
+            --color-accent-pink: #ff4081;
+            --color-accent-blue: #536dfe;
+            --color-text-dark: #1a1a2e;
+            --color-slider-bg: #fffde7;
+            --color-footer-bg: #c5cae9; 
+            --color-grid-bg: #e1bee7; 
+            --max-width: 450px; 
+        }
+
+        /* Сброс и центрирование */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            max-width: var(--max-width);
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- 1. HEADER (ИЗМЕНЕНИЯ ДЛЯ КНОПКИ НАЗАД) --- */
+        .header-section {
+            display: flex;
+            /* Центрируем логотип, позволяя кнопке находиться слева */
+            justify-content: center; 
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
+            position: relative; 
+        }
+
+        /* НОВЫЙ СТИЛЬ: Кнопка назад */
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.5em; 
+            color: var(--color-accent-pink); 
+            cursor: pointer;
+            padding: 0;
+            line-height: 1; 
+            position: absolute; 
+            left: 20px; /* Отступ слева */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            opacity: 0.8;
+        }
+        
+        .logo {
+            font-size: 1.2em;
+            font-weight: 900;
+            color: var(--color-accent-pink);
+            margin: 0; 
+            text-align: center;
+        }
+
+        /* --- 2. СЛАЙДЕР --- */
+        .slider-section {
+            padding: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 150px;
+            background-color: var(--color-slider-bg);
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out; 
+            position: relative;
+        }
+
+        /* Добавляем градиент для лучшей читаемости текста на фоне */
+        .slider-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3); 
+            z-index: 1;
+        }
+
+        .arrow, .slider-content {
+            z-index: 2; 
+        }
+        
+        .arrow {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 0 10px;
+            cursor: pointer;
+            color: white; 
+            user-select: none; 
+            transition: color 0.1s;
+            text-shadow: 0 0 3px var(--color-text-dark);
+        }
+
+        .arrow:active {
+            color: var(--color-accent-pink);
+        }
+
+        .slider-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slider-label {
+            font-size: 0.7em;
+            margin-bottom: 5px;
+            color: white; 
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px var(--color-text-dark);
+        }
+
+        /* Стиль для кликабельной карточки слайдера */
+        .slider-card-link {
+            background-color: rgba(255, 255, 255, 0.9); 
+            width: 80%;
+            height: 100px;
+            border: 2px solid var(--color-accent-pink);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            text-decoration: none; 
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        .slider-card-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider-card-link h2 {
+            font-size: 0.8em;
+            margin: 0;
+            padding: 0 10px;
+            color: var(--color-text-dark);
+            font-weight: 600;
+            line-height: 1.2;
+            transition: opacity 0.3s ease-in-out; 
+        }
+
+        /* --- 3. ГЛАВНЫЙ ОБЗОР --- */
+        .content-section {
+            padding: 20px;
+            display: flex;
+            gap: 15px;
+            background-color: var(--color-bg-light);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .left-box {
+            min-width: 120px;
+            height: 100px;
+            background-color: var(--color-slider-bg);
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .right-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .article-title {
+            font-size: 1em;
+            color: var(--color-text-dark);
+            margin-top: 0;
+        }
+
+        .article-preview {
+            font-size: 0.8em;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .read-button-link {
+            text-decoration: none; 
+            align-self: flex-end;
+        }
+
+        .read-button {
+            padding: 8px 12px;
+            background-color: var(--color-accent-pink);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.8em;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s;
+        }
+
+        .read-button:hover {
+            background-color: #ff6e9f;
+        }
+
+        /* --- 4. СЕТКА ЭЛЕМЕНТОВ --- */
+        .grid-section {
+            padding: 20px 15px 15px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: var(--color-text-dark);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--color-accent-pink);
+            padding-left: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        /* Стили для тега <a>, который является grid-item */
+        .grid-item {
+            height: 80px;
+            background-color: var(--color-grid-bg);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            text-decoration: none; 
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #ce93d8;
+        }
+
+        .grid-item i {
+            font-size: 1.2em;
+            color: var(--color-accent-blue);
+            margin-bottom: 5px;
+        }
+
+        .grid-item p {
+            font-size: 0.7em;
+            margin: 0;
+            color: var(--color-text-dark);
+        }
+
+        .grid-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* --- 5. ФОРМА ПОДПИСКИ --- */
+        .input-section {
+            padding: 20px 20px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--color-bg-light);
+        }
+
+        .put-button {
+            width: 90%; 
+            max-width: 300px;
+            padding: 10px 0;
+            background-color: var(--color-accent-blue);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s;
+            
+            display: block; 
+            text-align: center; 
+            text-decoration: none; 
+        }
+
+        .put-button:hover {
+            background-color: #7986cb;
+        }
+
+        /* --- 6. FOOTER (Нижняя навигация) --- */
+        .footer-section {
+            background-color: var(--color-footer-bg);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 60px;
+            border-top: 1px solid #aaa;
+            position: sticky; 
+            bottom: 0;
+        }
+
+        .footer-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #757575;
+            font-size: 0.7em;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .footer-item i {
+            font-size: 1.2em;
+            margin-bottom: 3px;
+        }
+
+        .footer-item.active {
+            color: var(--color-accent-pink);
+            font-weight: bold;
+        }
+
+        /* --- 8. СТИЛИ ДЛЯ БАННЕРА-УВЕДОМЛЕНИЯ (TOAST) --- */
+        .toast-notification {
+            visibility: hidden; 
+            position: fixed;
+            z-index: 1100; 
+            top: 0;
+            left: 50%;
+            
+            width: 90%;
+            max-width: 400px; 
+            transform: translate(-50%, -100%); 
+            
+            background-color: #fff;
+            color: var(--color-text-dark);
+            border: 2px solid var(--color-accent-blue);
+            border-radius: 0 0 10px 10px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            text-align: left;
+            
+            transition: transform 0.5s ease-out;
+        }
+
+        .toast-notification.show {
+            visibility: visible;
+            transform: translate(-50%, 0); 
+        }
+
+        .toast-icon {
+            font-size: 1.5em;
+            color: var(--color-accent-blue); 
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .toast-message {
+            font-size: 0.9em;
+            line-height: 1.3;
+        }
+        
+        /* --- Стили для скрытия ссылки "Вернуться на главную" --- */
+        /* Удален тег <a href="index2.html" class="back-home"> из <body>, он больше не нужен */
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (min-width: 769px) {
+            .page-wrapper {
+                max-width: 900px;
+                border: 1px solid #ccc;
+            }
+
+            .header-section {
+                justify-content: center;
+            }
+            .logo {
+                font-size: 1.5em;
+                margin: 0;
+            }
+            /* Скрываем кнопку "Назад" на больших экранах, чтобы она не мешала центрированию */
+            .back-button {
+                display: none; 
+            }
+            .footer-section {
+                display: none; 
+            }
+            
+            .page-wrapper::after {
+                content: "© 2025 Anime Pulse. Все права защищены. | Политика конфиденциальности | ";
+                display: block;
+                text-align: center;
+                padding: 15px;
+                font-size: 0.8em;
+                color: #777;
+                background-color: #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper">
+        <header class="header-section">
+            <button class="back-button" onclick="window.history.back()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            
+            <h1 class="logo">ANIME PULSE</h1>
+        </header>
+
+        <section class="slider-section" id="sliderSection">
+            <div class="arrow left-arrow" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></div>
+            <div class="slider-content">
+                <span class="slider-label">Сейчас в тренде</span>
+                <a id="slideLink" href="#" target="_blank" class="slider-card-link">
+                    <h2 id="slideTitle">Человек-бензопила в кинотеатрах Беларуси: официальный анонс!</h2>
+                </a>
+                </div>
+            <div class="arrow right-arrow" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></div>
+        </section>
+
+        <section class="content-section">
+            <div class="left-box">
+                <img src="img/человек бензопила.jpeg"
+                    alt="Chainsaw Man Movie"
+                    style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    ">
+            </div>
+
+            <div class="right-content">
+                <h3 class="article-title">
+                    🔥 Chainsaw Man: The Movie — уже в кино
+                </h3>
+                <p class="article-preview">
+                    Полнометражное продолжение культового аниме — кровь, экшен и безумие.
+                </p>
+                <a href="chainsaw_man_article.html" class="read-button-link"> 
+                    <button class="read-button">
+                        читать далее <i class="fas fa-arrow-right"></i>
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <section class="grid-section">
+            <h2 class="section-title">Свежие новости</h2>
+            <div class="grid-container">
+                
+                <a href="https://skyeng.ru/magazine/top-luchshih-anime-serialov/" target="_blank" class="grid-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <p><b>Рекомендуемые нами аниме</b></p>
+                </a>
+                
+                <a href="https://www.championat.com/cybersport/news-6025790-crunchyroll-anime-awards-2025-vse-pobediteli-podnyatie-urovnya-v-odinochku-oglyanis-dandadan-i-drugie.html" target="_blank" class="grid-item">
+                    <i class="fas fa-trophy"></i>
+                    <p>Победители премии <br><strong> Crunchyroll Anime Awards </strong></br></p>
+                </a>
+                
+                <a href="https://animaunt.org/calendar.html" target="_blank" class="grid-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p><b>Дата выхода новых аниме</b></p>
+                </a>
+                
+                <a href="https://mangalib.me/" target="_blank" class="grid-item">
+                    <i class="fas fa-gamepad"></i>
+                    <p><strong>Читайте манги здесь!</strong></p>
+                </a>
+            </div>
+        </section>
+
+        <section class="input-section">
+            <h2 class="section-title">Подпишитесь на дайджест</h2>
+            <a href="subscribe_confirmation.html" class="put-button">
+                 Подписаться <i class="fas fa-bell"></i>
+            </a>
+        </section>
+        <footer class="footer-section">
+            <div class="footer-item active">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-video"></i>
+                <span>Трейлеры</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </div>
+        </footer>
+    </div>
+    
+    <div id="subscriptionToast" class="toast-notification">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <span class="toast-message" id="toastMessage">Вы подписаны! Уведомления о новостях будут приходить вам на почту.</span>
+    </div>
+
+    <script>
+        const newsHeadlines = [
+            "Человек-бензопила в кинотеатрах Беларуси: официальный анонс!",
+            "Анонсирован 3-й сезон «Магической битвы» с датой выхода.",
+            "ТОП-5 самых ожидаемых аниме Зимнего сезона 2026.",
+            "Манга «Ван-Пис» ставит новый рекорд продаж за год.",
+            "Обзор игры по франшизе «Атака Титанов»: стоит ли покупать?"
+        ];
+        
+        const newsURLs = [
+            "https://afisha.relax.by/kino/11146513-chelovek-benzopila-filym-istorija-reze/minsk/", 
+            "https://www.cybersport.ru/tags/anime/tretii-sezon-magicheskoi-bitvy-poluchil-treiler-i-datu-reliza", 
+            "https://shikimori.one/animes/season/2026", 
+            "https://srsly.ru/article/show/21921/", 
+            "https://dtf.ru/anime/3020056-luchshaya-igra-po-atake-titanov" 
+        ];
+
+        // ВАЖНО: ПУТИ К ИЗОБРАЖЕНИЯМ СЛАЙДЕРА
+        // ОБЯЗАТЕЛЬНО ЗАМЕНИТЕ ЭТИ ПУТИ НА ВАШИ РЕАЛЬНЫЕ!
+        const backgroundImages = [
+            'img/последняя пила.jpeg', // 1. Человек-бензопила
+            'img/магическая битва.webp', // 2. Магическая битва
+            'img/аниме.jpeg', // 3. Зимний сезон
+            'img/ван пис.jpeg', // 4. Ван-Пис
+            'img/атака титанов.jpeg' // 5. Атака Титанов
+        ];
+
+
+        let currentSlideIndex = 0;
+        let slideTitleElement;
+        let slideLinkElement; 
+        let sliderSectionElement; 
+
+        // --- ФУНКЦИИ СЛАЙДЕРА ---
+        function initializeSlider() {
+            slideTitleElement = document.getElementById('slideTitle');
+            slideLinkElement = document.getElementById('slideLink'); 
+            sliderSectionElement = document.getElementById('sliderSection'); 
+            currentSlideIndex = 0; 
+            updateSlide(); 
+        }
+
+        function updateSlide() {
+            if (!slideTitleElement || !slideLinkElement || !sliderSectionElement) return; 
+
+            // Скрываем текст для плавного перехода
+            slideTitleElement.style.opacity = '0';
+            
+            // Плавно меняем фон (CSS transition handles the visual effect)
+            sliderSectionElement.style.backgroundImage = `url('${backgroundImages[currentSlideIndex]}')`;
+
+            setTimeout(() => {
+                // Обновляем текст и ссылку
+                slideTitleElement.textContent = newsHeadlines[currentSlideIndex];
+                slideLinkElement.href = newsURLs[currentSlideIndex]; 
+                
+                // Показываем текст
+                slideTitleElement.style.opacity = '1';
+            }, 150); 
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % newsHeadlines.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + newsHeadlines.length) % newsHeadlines.length;
+            updateSlide();
+        }
+
+        window.addEventListener('pageshow', initializeSlider);
+        
+        // --- ФУНКЦИЯ УВЕДОМЛЕНИЯ ---
+        function showToastSimple() {
+            const toast = document.getElementById('subscriptionToast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            // Успешная подписка 
+            toast.style.borderColor = 'var(--color-accent-blue)';
+            toast.querySelector('.toast-icon').style.color = 'var(--color-accent-blue)';
+            toastMessage.textContent = "Спасибо за подписку! Уведомления о новостях будут приходить вам на почту.";
+            
+            // 1. Показываем баннер
+            toast.classList.add('show');
+            
+            // 2. Скрываем баннер через 4 секунды
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000); 
+        }
+    </script>
+    <script>
+    // Если на GitHub Pages и открыта неверная страница
+    if (window.location.hostname.includes('github.io')) {
+        // Список всех существующих страниц
+        const validPages = [
+            '', // корень
+            'index.html',
+            'index2.html',
+            'subscribe_confirmation.html',
+            'chainsaw_man_article.html',
+            '404.html'
+        ];
+        
+        // Текущий путь без слеша в начале
+        const currentPath = window.location.pathname.split('/').pop() || '';
+        
+        // Если страница не существует и мы не на 404
+        if (!validPages.includes(currentPath) && 
+            !currentPath.includes('.css') &&
+            !currentPath.includes('.js') &&
+            !currentPath.includes('.jpg') &&
+            !currentPath.includes('.jpeg') &&
+            !currentPath.includes('.png') &&
+            currentPath !== '404.html') {
+            
+            // Перенаправляем на 404
+            window.location.href = '404.html';
+        }
+    }
+</script>
+</body>
+</html>

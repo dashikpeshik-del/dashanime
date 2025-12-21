@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Человек-бензопила в Беларуси | Anime Pulse</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header-section">
+            <a href="index.html" style="color: inherit; text-decoration: none;"><i class="fas fa-arrow-left menu-icon"></i></a>
+            <h1 class="logo">ANIME PULSE</h1>
+            <i class="fas fa-share-alt search-icon"></i>
+        </header>
+
+        <div class="article-page-content">
+            <h1>Человек-бензопила в кинотеатрах Беларуси: официальный анонс!</h1>
+            
+            <div class="left-box">
+    <img src="img/пилаааааа.jpeg"
+         alt="Chainsaw Man Movie"
+         style="
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+         ">
+</div>
+
+            <p>
+                Поклонники одного из самых обсуждаемых аниме последних лет могут ликовать: долгожданный показ **"Человека-бензопилы" (Chainsaw Man)** официально стартует в белорусских кинотеатрах! Анонс, сделанный прокатчиком, подтверждает, что зрители смогут увидеть первые эпизоды на большом экране. Это уникальная возможность погрузиться в мрачный и динамичный мир Дэндзи с максимальным качеством звука и изображения.
+            </p>
+            
+            <p>
+                Ожидается, что показ будет проходить с оригинальной японской озвучкой и русскими субтитрами. Даты показов и список городов будут объявлены дополнительно на официальных ресурсах киносетей, а также на нашем сайте в разделе "Анонсы". Не пропустите шанс стать частью этого культурного события!
+            </p>
+            
+            <p>
+                *Следите за обновлениями, чтобы узнать точное расписание сеансов и приобрести билеты.*
+            </p>
+            
+            <a href="index2.html" class="back-button">
+                <i class="fas fa-home"></i> Вернуться на главную
+            </a>
+        </div>
+
+        <footer class="footer-section">
+            <div class="footer-item">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </div>
+            <div class="footer-item active">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-video"></i>
+                <span>Трейлеры</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </div>
+        </footer>
+    </div>
+    <script>
+    // Если на GitHub Pages и открыта неверная страница
+    if (window.location.hostname.includes('github.io')) {
+        // Список всех существующих страниц
+        const validPages = [
+            '', // корень
+            'index.html',
+            'index2.html',
+            'subscribe_confirmation.html',
+            'chainsaw_man_article.html',
+            '404.html'
+        ];
+        
+        // Текущий путь без слеша в начале
+        const currentPath = window.location.pathname.split('/').pop() || '';
+        
+        // Если страница не существует и мы не на 404
+        if (!validPages.includes(currentPath) && 
+            !currentPath.includes('.css') &&
+            !currentPath.includes('.js') &&
+            !currentPath.includes('.jpg') &&
+            !currentPath.includes('.jpeg') &&
+            !currentPath.includes('.png') &&
+            currentPath !== '404.html') {
+            
+            // Перенаправляем на 404
+            window.location.href = '404.html';
+        }
+    }
+</script>
+</body>
+</html>

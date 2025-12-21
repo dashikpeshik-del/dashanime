@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Pulse: Свежие новости аниме, манги и отаку-культуры</title>
+    <meta name="description" content="Ежедневные новости аниме-индустрии, обзоры новых сезонов, даты выхода, трейлеры и мнения сообщества. Будь в курсе всех событий!">
+    <meta name="keywords" content="аниме новости, манга, отаку, обзоры аниме, что посмотреть, дата выхода, трейлеры, топ аниме, новые сезоны, японская анимация.">
+    
+    <link rel="icon" href="favicon.png" type="image/png"> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header-section">
+            <i class="fas fa-bars menu-icon"></i>
+            <h1 class="logo">ANIME PULSE</h1>
+            <i class="fas fa-search search-icon"></i>
+        </header>
+
+        <section class="slider-section">
+            <div class="arrow left-arrow" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></div>
+            <div class="slider-content">
+                <span class="slider-label">Сейчас в тренде</span>
+                <div class="slider-card-placeholder">
+                    <h2 id="slideTitle">Человек-бензопила в кинотеатрах Беларуси: официальный анонс!</h2>
+                </div>
+            </div>
+            <div class="arrow right-arrow" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></div>
+        </section>
+
+        <section class="content-section">
+            <div class="left-box image-box" style="background-image: url('anime_thumb.jpg');">
+                </div>
+            <div class="right-content">
+                <h3 class="article-title">
+                    🔥 Обзор: "Frieren: Beyond Journey’s End" – аниме года?
+                </h3>
+                <p class="article-preview">
+                    Неожиданный хит, который покорил сердца зрителей своей меланхоличностью...
+                </p>
+                <a href="chainsaw_man_article.html" class="read-button-link"> 
+                    <button class="read-button">
+                        читать далее <i class="fas fa-arrow-right"></i>
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <section class="grid-section">
+            <h2 class="section-title">Свежие новости</h2>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <p>Анонс фильма</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-trophy"></i>
+                    <p>Победители премии</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Даты релизов</p>
+                </div>
+                <div class="grid-item">
+                    <i class="fas fa-gamepad"></i>
+                    <p>Игры по аниме</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="input-section">
+            <h2 class="section-title">Подпишитесь на дайджест</h2>
+            <a href="subscribe_confirmation.html" class="put-button-link"> 
+                <button class="put-button">
+                    Подписаться <i class="fas fa-bell"></i>
+                </button>
+            </a>
+        </section>
+        <footer class="footer-section">
+            <div class="footer-item active">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-video"></i>
+                <span>Трейлеры</span>
+            </div>
+            <div class="footer-item">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </div>
+        </footer>
+    </div>
+    
+    <script>
+        const newsHeadlines = [
+            "Человек-бензопила в кинотеатрах Беларуси: официальный анонс!",
+            "Анонсирован 3-й сезон «Магической битвы» с датой выхода.",
+            "ТОП-5 самых ожидаемых аниме Зимнего сезона 2026.",
+            "Манга «Ван-Пис» ставит новый рекорд продаж за год.",
+            "Обзор игры по франшизе «Атака Титанов»: стоит ли покупать?"
+        ];
+        let currentSlideIndex = 0;
+        let slideTitleElement;
+
+        // --- ФУНКЦИИ СЛАЙДЕРА (Исправление BFCache) ---
+        function initializeSlider() {
+            slideTitleElement = document.getElementById('slideTitle');
+            // Принудительный сброс индекса на 0 при каждой "загрузке"
+            currentSlideIndex = 0; 
+            updateSlide(); 
+        }
+
+        function updateSlide() {
+            if (!slideTitleElement) return;
+
+            slideTitleElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                slideTitleElement.textContent = newsHeadlines[currentSlideIndex];
+                slideTitleElement.style.opacity = '1';
+            }, 150); 
+        }
+
+        function nextSlide() {
+            currentSlideIndex = (currentSlideIndex + 1) % newsHeadlines.length;
+            updateSlide();
+        }
+
+        function prevSlide() {
+            currentSlideIndex = (currentSlideIndex - 1 + newsHeadlines.length) % newsHeadlines.length;
+            updateSlide();
+        }
+
+        // Событие pageshow гарантирует запуск при возврате со страницы статьи
+        window.addEventListener('pageshow', initializeSlider);
+        
+        // --- ФУНКЦИЯ УВЕДОМЛЕНИЯ (УДАЛЕНА) ---
+        // function showToast() { ... }
+    </script>
+    <script>
+    // Если на GitHub Pages и открыта неверная страница
+    if (window.location.hostname.includes('github.io')) {
+        // Список всех существующих страниц
+        const validPages = [
+            '', // корень
+            'index.html',
+            'index2.html',
+            'subscribe_confirmation.html',
+            'chainsaw_man_article.html',
+            '404.html'
+        ];
+        
+        // Текущий путь без слеша в начале
+        const currentPath = window.location.pathname.split('/').pop() || '';
+        
+        // Если страница не существует и мы не на 404
+        if (!validPages.includes(currentPath) && 
+            !currentPath.includes('.css') &&
+            !currentPath.includes('.js') &&
+            !currentPath.includes('.jpg') &&
+            !currentPath.includes('.jpeg') &&
+            !currentPath.includes('.png') &&
+            currentPath !== '404.html') {
+            
+            // Перенаправляем на 404
+            window.location.href = '404.html';
+        }
+    }
+</script>
+</body>
+</html>

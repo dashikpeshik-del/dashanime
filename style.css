@@ -1,0 +1,400 @@
+/* --- Глобальные стили (Цветовая палитра) --- */
+:root {
+    --color-bg-light: #f4f7f6;
+    --color-accent-pink: #ff4081;
+    --color-accent-blue: #536dfe;
+    --color-text-dark: #1a1a2e;
+    --color-slider-bg: #fffde7;
+    --color-footer-bg: #c5cae9; 
+    --color-grid-bg: #e1bee7; 
+    --max-width: 450px; 
+}
+
+/* Сброс и центрирование */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.page-wrapper {
+    width: 100%;
+    max-width: var(--max-width);
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 1. HEADER --- */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+}
+
+.logo {
+    font-size: 1.2em;
+    font-weight: 900;
+    color: var(--color-accent-pink);
+    margin: 0;
+}
+
+.menu-icon, .search-icon {
+    font-size: 1.2em;
+    color: var(--color-accent-blue);
+}
+
+/* --- 2. СЛАЙДЕР --- */
+.slider-section {
+    background-color: var(--color-slider-bg);
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+}
+
+.arrow {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0 10px;
+    cursor: pointer;
+    color: var(--color-accent-blue);
+}
+
+.slider-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.slider-label {
+    font-size: 0.7em;
+    margin-bottom: 5px;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+}
+
+.slider-card-placeholder {
+    background-color: #fff;
+    width: 80%;
+    height: 100px;
+    border: 2px solid var(--color-accent-pink);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.slider-card-placeholder h2 {
+    font-size: 0.8em;
+    margin: 0;
+    padding: 0 10px;
+    color: var(--color-text-dark);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* --- 3. ГЛАВНЫЙ ОБЗОР --- */
+.content-section {
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    background-color: var(--color-bg-light);
+    border-bottom: 1px solid #ddd;
+}
+
+.left-box {
+    min-width: 120px;
+    height: 100px;
+    background-color: var(--color-slider-bg);
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.image-box {
+    background-image: url('https://via.placeholder.com/120x100?text=ANIME');
+    background-size: cover;
+    background-position: center;
+}
+
+.right-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.article-title {
+    font-size: 1em;
+    color: var(--color-text-dark);
+    margin-top: 0;
+}
+
+.article-preview {
+    font-size: 0.8em;
+    color: #555;
+    margin-bottom: 10px;
+}
+/* Стилизация ссылки-контейнера для кнопки */
+.read-button-link {
+    text-decoration: none; /* Убираем подчеркивание у ссылки */
+    align-self: flex-end;
+}
+
+.read-button {
+    padding: 8px 12px;
+    background-color: var(--color-accent-pink);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.8em;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+.read-button:hover {
+    background-color: #ff6e9f;
+}
+
+/* --- 4. СЕТКА ЭЛЕМЕНТОВ --- */
+.grid-section {
+    padding: 20px 15px 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.section-title {
+    font-size: 1.2em;
+    color: var(--color-text-dark);
+    margin-bottom: 15px;
+    border-left: 4px solid var(--color-accent-pink);
+    padding-left: 10px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.grid-item {
+    height: 80px;
+    background-color: var(--color-grid-bg);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #ce93d8;
+}
+
+.grid-item i {
+    font-size: 1.2em;
+    color: var(--color-accent-blue);
+    margin-bottom: 5px;
+}
+
+.grid-item p {
+    font-size: 0.7em;
+    margin: 0;
+    color: var(--color-text-dark);
+}
+
+.grid-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* --- 5. ФОРМА ПОДПИСКИ --- */
+.input-section {
+    padding: 20px 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-bg-light);
+}
+
+.input-line {
+    width: 90%;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    font-size: 0.9em;
+}
+
+.put-button {
+    width: 90%;
+    padding: 10px 0;
+    background-color: var(--color-accent-blue);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s;
+}
+
+.put-button:hover {
+    background-color: #7986cb;
+}
+
+/* --- 6. FOOTER (Нижняя навигация) --- */
+.footer-section {
+    background-color: var(--color-footer-bg);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    border-top: 1px solid #aaa;
+    position: sticky; 
+    bottom: 0;
+}
+
+.footer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #757575;
+    font-size: 0.7em;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.footer-item i {
+    font-size: 1.2em;
+    margin-bottom: 3px;
+}
+
+.footer-item.active {
+    color: var(--color-accent-pink);
+    font-weight: bold;
+}
+
+/* Стили для страницы статьи (chainsaw_man_article.html) */
+.article-page-content {
+    padding: 20px;
+}
+.article-page-content h1 {
+    color: var(--color-accent-pink);
+    font-size: 1.8em;
+    margin-top: 0;
+}
+.article-page-content p {
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+.article-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #1a1a2e;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+.back-button {
+    display: block;
+    padding: 10px 20px;
+    background-color: var(--color-accent-blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+
+/* --- АДАПТИВНОСТЬ --- */
+
+/* Планшеты */
+@media (min-width: 451px) and (max-width: 768px) {
+    .page-wrapper {
+        max-width: 600px;
+        border: 1px solid #ccc;
+    }
+    
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .slider-section, .content-section, .grid-section, .input-section, .article-page-content {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+
+/* Десктоп */
+@media (min-width: 769px) {
+    .page-wrapper {
+        max-width: 900px;
+        border: 1px solid #ccc;
+    }
+
+    .header-section {
+        justify-content: flex-start;
+        gap: 40px;
+    }
+    .menu-icon, .search-icon {
+        font-size: 1.5em;
+    }
+    .logo {
+        font-size: 1.5em;
+        margin-right: auto;
+    }
+
+    .content-section {
+        gap: 30px;
+    }
+    .left-box {
+        min-width: 200px;
+        height: 150px;
+    }
+    .article-title {
+        font-size: 1.2em;
+    }
+    .article-preview {
+        font-size: 0.9em;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    /* Нижняя панель навигации скрыта на десктопе */
+    .footer-section {
+        display: none; 
+    }
+    
+    /* Добавляем десктопный подвал */
+    .page-wrapper::after {
+        content: "© 2024 Anime Pulse. Все права защищены. | Политика конфиденциальности | О нас";
+        display: block;
+        text-align: center;
+        padding: 15px;
+        font-size: 0.8em;
+        color: #777;
+        background-color: #ddd;
+    }
+}
